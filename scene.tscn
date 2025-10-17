@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bl5waqp7ry1ji"]
+
+[ext_resource type="Script" uid="uid://ji4alrky2er6" path="res://spawner.gd" id="2_nxogm"]
+
+[sub_resource type="Environment" id="Environment_drvgu"]
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_ulcgi"]
+
+[sub_resource type="Compositor" id="Compositor_nxogm"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_drvgu"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_drvgu"]
+
+[node name="Scene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85471785, 2.6942255)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_drvgu")
+camera_attributes = SubResource("CameraAttributesPhysical_ulcgi")
+compositor = SubResource("Compositor_nxogm")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_drvgu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_drvgu")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.77651954, -0.5549704, 0.29837117, 0, 0.47353494, 0.88077503, -0.6300932, -0.68393904, 0.36770913, 0, 0, 0)
+
+[node name="Spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.006547, 0)
+script = ExtResource("2_nxogm")
