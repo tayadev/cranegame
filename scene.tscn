@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bl5waqp7ry1ji"]
+[gd_scene load_steps=15 format=3 uid="uid://bl5waqp7ry1ji"]
 
 [ext_resource type="Script" uid="uid://cxhaidi7nkvhi" path="res://claw_machine.gd" id="1_3253y"]
+[ext_resource type="Script" uid="uid://bpc1x678fs6lb" path="res://game.gd" id="1_y2354"]
 [ext_resource type="Script" uid="uid://jcirtxgjs2uk" path="res://addons/orbit-controls/orbit-controls.gd" id="2_3253y"]
 [ext_resource type="Script" uid="uid://ji4alrky2er6" path="res://spawner.gd" id="2_nxogm"]
 [ext_resource type="ArrayMesh" uid="uid://bd63m8recbue8" path="res://assets/Ball_blue-1-Duck.vox" id="3_m7jmp"]
@@ -23,6 +24,7 @@
 [sub_resource type="BoxMesh" id="BoxMesh_u3cyc"]
 
 [node name="Scene" type="Node3D"]
+script = ExtResource("1_y2354")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_drvgu")

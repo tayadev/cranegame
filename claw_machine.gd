@@ -24,7 +24,6 @@ enum GameStage {
 
 var stage: GameStage = GameStage.IDLE
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	claw_rest_position = claw_object.position
 	claw_object.body_entered.connect(_on_claw_body_entered)
