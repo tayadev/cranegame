@@ -1,5 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bl5waqp7ry1ji"]
+[gd_scene load_steps=12 format=3 uid="uid://bl5waqp7ry1ji"]
 
+[ext_resource type="Script" uid="uid://cxhaidi7nkvhi" path="res://claw_machine.gd" id="1_3253y"]
+[ext_resource type="Script" uid="uid://jcirtxgjs2uk" path="res://addons/orbit-controls/orbit-controls.gd" id="2_3253y"]
 [ext_resource type="Script" uid="uid://ji4alrky2er6" path="res://spawner.gd" id="2_nxogm"]
 
 [sub_resource type="Environment" id="Environment_drvgu"]
@@ -12,27 +14,89 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_drvgu"]
 
-[node name="Scene" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_3253y"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85471785, 2.6942255)
+[sub_resource type="BoxShape3D" id="BoxShape3D_3253y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u3cyc"]
+
+[node name="Scene" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_drvgu")
 camera_attributes = SubResource("CameraAttributesPhysical_ulcgi")
 compositor = SubResource("Compositor_nxogm")
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="ClawMachine" type="Node" parent="."]
+script = ExtResource("1_3253y")
+claw_max_x = 0.8
+claw_max_z = 0.8
+claw_lowered_y = 0.3
+claw_speed = 0.4
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="Box" type="StaticBody3D" parent="ClawMachine"]
+
+[node name="FloorCollider" type="CollisionShape3D" parent="ClawMachine/Box"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 shape = SubResource("WorldBoundaryShape3D_drvgu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ClawMachine/Box"]
 mesh = SubResource("PlaneMesh_drvgu")
+
+[node name="WallCollider" type="CollisionShape3D" parent="ClawMachine/Box"]
+transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, -0.1, 0, 0.1, -4.371139e-09, 0, 1, -1)
+shape = SubResource("WorldBoundaryShape3D_drvgu")
+
+[node name="WallCollider2" type="CollisionShape3D" parent="ClawMachine/Box"]
+transform = Transform3D(-4.371139e-09, 0.1, -4.371139e-09, 0, -4.371139e-09, -0.1, -0.1, -4.371139e-09, 1.9106856e-16, -1, 1, 0)
+shape = SubResource("WorldBoundaryShape3D_drvgu")
+
+[node name="WallCollider3" type="CollisionShape3D" parent="ClawMachine/Box"]
+transform = Transform3D(-0.1, -8.742278e-09, 3.821371e-16, 2.1175822e-23, -4.371139e-09, -0.1, 8.742278e-09, -0.1, 4.371139e-09, 0, 1, 1)
+shape = SubResource("WorldBoundaryShape3D_drvgu")
+
+[node name="WallCollider4" type="CollisionShape3D" parent="ClawMachine/Box"]
+transform = Transform3D(1.3113417e-08, -0.1, 4.371139e-09, 2.1175822e-23, -4.371139e-09, -0.1, 0.1, 1.3113417e-08, -5.732057e-16, 1, 1, 0)
+shape = SubResource("WorldBoundaryShape3D_drvgu")
+
+[node name="Spawner" type="Node3D" parent="ClawMachine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6173639, 0)
+script = ExtResource("2_nxogm")
+spawn_count = 50
+spawn_delay = 0.0
+
+[node name="Claw" type="Area3D" parent="ClawMachine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7675066, 1.7778122, -0.8170407)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ClawMachine/Claw"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_3253y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClawMachine/Claw"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_3253y")
+
+[node name="RailX" type="Node3D" parent="ClawMachine"]
+
+[node name="Model" type="MeshInstance3D" parent="ClawMachine/RailX"]
+transform = Transform3D(2, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 1.7706716, -0.84015)
+mesh = SubResource("BoxMesh_u3cyc")
+skeleton = NodePath("../..")
+
+[node name="RailZ" type="Node3D" parent="ClawMachine"]
+
+[node name="Model" type="MeshInstance3D" parent="ClawMachine/RailZ"]
+transform = Transform3D(-8.742278e-08, 0, -0.08, 0, 0.08, 0, 2, 0, -3.496911e-09, -0.75641835, 1.7706716, 0.0029140115)
+mesh = SubResource("BoxMesh_u3cyc")
+skeleton = NodePath("../..")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.77651954, -0.5549704, 0.29837117, 0, 0.47353494, 0.88077503, -0.6300932, -0.68393904, 0.36770913, 0, 0, 0)
 
-[node name="Spawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.006547, 0)
-script = ExtResource("2_nxogm")
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.009913351, 0.39494896, -0.9186496, 4.333782e-09, 0.91869485, 0.3949685, 0.999951, -0.003915459, 0.009107325, -2.2719357, 0.993876, -0.0035903454)
+
+[node name="OrbitControls" type="Node3D" parent="."]
+script = ExtResource("2_3253y")
+_camera = NodePath("../Camera3D")
+metadata/_custom_type_script = "uid://jcirtxgjs2uk"
