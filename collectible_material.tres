@@ -2,3 +2,4 @@
 
 [resource]
 vertex_color_use_as_albedo = true
+metallic_specular = 0.0

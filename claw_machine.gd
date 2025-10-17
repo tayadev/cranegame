@@ -29,7 +29,6 @@ func _ready() -> void:
 	claw_rest_position = claw_object.position
 	claw_object.body_entered.connect(_on_claw_body_entered)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	match stage:
 		GameStage.SETX:
