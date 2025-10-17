@@ -12,7 +12,6 @@ func _ready() -> void:
 func spawn_objects_over_time() -> void:
 	for i in range(spawn_count):
 		var obj_instance = CollectibleTemplate.instantiate()
-		obj_instance.color = Color(randf(), randf(), randf())
 		obj_instance.global_transform.origin = self.global_transform.origin + Vector3(randf() * offset_scale, 0, randf() * offset_scale)
 		
 		add_child(obj_instance)
