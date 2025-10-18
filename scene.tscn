@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bl5waqp7ry1ji"]
+[gd_scene load_steps=15 format=3 uid="uid://bl5waqp7ry1ji"]
 
 [ext_resource type="Script" uid="uid://cxhaidi7nkvhi" path="res://claw_machine.gd" id="1_3253y"]
+[ext_resource type="Script" uid="uid://bpc1x678fs6lb" path="res://game.gd" id="1_y2354"]
 [ext_resource type="Script" uid="uid://jcirtxgjs2uk" path="res://addons/orbit-controls/orbit-controls.gd" id="2_3253y"]
 [ext_resource type="Script" uid="uid://ji4alrky2er6" path="res://spawner.gd" id="2_nxogm"]
+[ext_resource type="ArrayMesh" uid="uid://bd63m8recbue8" path="res://assets/Ball_blue-1-Duck.vox" id="3_m7jmp"]
+[ext_resource type="ArrayMesh" uid="uid://k1getyec2bow" path="res://assets/Ball_blue-0-Ball.vox" id="4_y2354"]
 
 [sub_resource type="Environment" id="Environment_drvgu"]
 
@@ -21,6 +24,7 @@
 [sub_resource type="BoxMesh" id="BoxMesh_u3cyc"]
 
 [node name="Scene" type="Node3D"]
+script = ExtResource("1_y2354")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_drvgu")
@@ -62,8 +66,10 @@ shape = SubResource("WorldBoundaryShape3D_drvgu")
 [node name="Spawner" type="Node3D" parent="ClawMachine"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6173639, 0)
 script = ExtResource("2_nxogm")
+possible_models = Array[Mesh]([ExtResource("3_m7jmp"), ExtResource("4_y2354")])
 spawn_count = 50
 spawn_delay = 0.0
+size = 0.3
 
 [node name="Claw" type="Area3D" parent="ClawMachine"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7675066, 1.7778122, -0.8170407)

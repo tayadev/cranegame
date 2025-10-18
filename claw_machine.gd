@@ -24,12 +24,10 @@ enum GameStage {
 
 var stage: GameStage = GameStage.IDLE
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	claw_rest_position = claw_object.position
 	claw_object.body_entered.connect(_on_claw_body_entered)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	match stage:
 		GameStage.SETX:
@@ -98,7 +96,7 @@ func _input(event):
 
 func _on_claw_body_entered(body: Node3D) -> void:
 	if stage == GameStage.LOWERING and attached_object == null:
-		if body.is_in_group("collectible"):
+		if body.is_in_group("collectibles"):
 			attached_object = body
 			body.reparent(claw_object)
 			body.freeze = true  # Stop physics simulation
