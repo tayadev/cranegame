@@ -5,7 +5,7 @@ Crane Game Roguelike
 Things that are variable throughout the game / can be upgraded:
   - pull cost (goes up with each pull)
   - maybe it should buy multiple pulls at once?
-    - maybe have a pull limit per round? or maybe the pool of items depleting is enough?
+	- maybe have a pull limit per round? or maybe the pool of items depleting is enough?
   - inventory size
   - claw strength
   - claw capacity (how many items it can hold at once)
