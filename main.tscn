@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cus0q74uc6xwm"]
+[gd_scene load_steps=23 format=3 uid="uid://cus0q74uc6xwm"]
 
 [ext_resource type="Texture2D" uid="uid://6pa1vxku67yx" path="res://assets/floor.webp" id="1_1bvp3"]
 [ext_resource type="Script" uid="uid://bpc1x678fs6lb" path="res://game.gd" id="1_7mycd"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://f6meigojmfxy" path="res://assets/crosshair.png" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://cqgtwrepr7b5o" path="res://assets/wall.webp" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://db3b4dob07c50" path="res://ClawMachine.tscn" id="7_272bh"]
+[ext_resource type="ArrayMesh" uid="uid://dlbj23mhb2oe" path="res://assets/Machine_test.vox" id="8_kek77"]
+[ext_resource type="ArrayMesh" uid="uid://dlnc6nfkakfhr" path="res://assets/Glass_test.vox" id="9_4c57u"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7dm0k"]
 
@@ -35,6 +37,13 @@ albedo_texture = ExtResource("5_lquwl")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5vw27"]
 material = SubResource("StandardMaterial3D_272bh")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kek77"]
+size = Vector3(1.0898438, 2.7852783, 1.2661743)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efxa6"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.5176471)
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_7mycd")
@@ -164,3 +173,22 @@ mesh = SubResource("PlaneMesh_5vw27")
 
 [node name="ClawMachine" parent="." instance=ExtResource("7_272bh")]
 transform = Transform3D(0.53, 0, 0, 0, 0.53, 0, 0, 0, 0.53, 1.7778091, 0.16767621, -4.051466)
+
+[node name="Node" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Node"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7350852, 1.3949367, 4.3432236)
+shape = SubResource("BoxShape3D_kek77")
+
+[node name="MachineTest" type="MeshInstance3D" parent="Node"]
+transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 1.7243085, 0.000936687, 4.341978)
+mesh = ExtResource("8_kek77")
+skeleton = NodePath("../..")
+
+[node name="GlassTest" type="MeshInstance3D" parent="Node"]
+transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 1.7237716, 1.263167, 4.4424686)
+mesh = ExtResource("9_4c57u")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_efxa6")
