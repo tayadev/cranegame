@@ -1,13 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://db3b4dob07c50"]
+[gd_scene load_steps=17 format=3 uid="uid://db3b4dob07c50"]
 
 [ext_resource type="Script" uid="uid://cxhaidi7nkvhi" path="res://claw_machine.gd" id="1_da6k5"]
 [ext_resource type="Script" uid="uid://ji4alrky2er6" path="res://spawner.gd" id="2_stw3m"]
 [ext_resource type="ArrayMesh" uid="uid://bd63m8recbue8" path="res://assets/Ball_blue-1-Duck.vox" id="3_wmqjb"]
 [ext_resource type="ArrayMesh" uid="uid://k1getyec2bow" path="res://assets/Ball_blue-0-Ball.vox" id="4_pyicp"]
+[ext_resource type="ArrayMesh" uid="uid://dlbj23mhb2oe" path="res://assets/Machine_test.vox" id="5_wmqjb"]
+[ext_resource type="ArrayMesh" uid="uid://dlnc6nfkakfhr" path="res://assets/Glass_test.vox" id="6_pyicp"]
+[ext_resource type="Script" uid="uid://bt7xxs7ol58w8" path="res://button.gd" id="7_pyicp"]
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_b7pdg"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_wmqjb"]
+size = Vector3(20.132813, 0.248, 27.954506)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_7di3s"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_b7pdg"]
+size = Vector3(7, 0.248, 5.305)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pyicp"]
+size = Vector3(10, 0.155, 6.38)
 
 [sub_resource type="BoxMesh" id="BoxMesh_51efx"]
 
@@ -15,49 +23,64 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_01jy6"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_da6k5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b7pdg"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.34117648)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7di3s"]
+size = Vector3(3.3903809, 1, 3.2910156)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_51efx"]
 
 [node name="ClawMachine" type="Node3D"]
 script = ExtResource("1_da6k5")
 
 [node name="Box" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0062592, 0)
-collision_layer = 2
-
-[node name="FloorCollider" type="CollisionShape3D" parent="Box"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-shape = SubResource("WorldBoundaryShape3D_b7pdg")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Box"]
-mesh = SubResource("PlaneMesh_7di3s")
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.06954813, 2.006259, 0.68595517)
 
 [node name="WallCollider" type="CollisionShape3D" parent="Box"]
-transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, -0.1, 0, 0.1, -4.371139e-09, 0, 1, -1)
-shape = SubResource("WorldBoundaryShape3D_b7pdg")
+transform = Transform3D(0.49, 0, 0, 0, -2.141858e-08, -0.49, 0, 0.49, -2.141858e-08, 0.004306674, 16.35868, -4)
+shape = SubResource("BoxShape3D_wmqjb")
 
 [node name="WallCollider2" type="CollisionShape3D" parent="Box"]
-transform = Transform3D(-4.371139e-09, 0.1, -4.371139e-09, 0, -4.371139e-09, -0.1, -0.1, -4.371139e-09, 1.9106856e-16, -1, 1, 0)
-shape = SubResource("WorldBoundaryShape3D_b7pdg")
+transform = Transform3D(0.49, 0, 0, 0, -2.141858e-08, -0.49, 0, 0.49, -2.141858e-08, 0, 16.310368, 5.842729)
+shape = SubResource("BoxShape3D_wmqjb")
 
 [node name="WallCollider3" type="CollisionShape3D" parent="Box"]
-transform = Transform3D(-0.1, -8.742278e-09, 3.821371e-16, 2.1175822e-23, -4.371139e-09, -0.1, 8.742278e-09, -0.1, 4.371139e-09, 0, 1, 1)
-shape = SubResource("WorldBoundaryShape3D_b7pdg")
+transform = Transform3D(-2.141858e-08, 0.49, -2.1418582e-08, 0, -2.1418582e-08, -0.49, -0.49, -2.141858e-08, 9.362359e-16, -4.921365, 16.310368, 0.9213648)
+shape = SubResource("BoxShape3D_wmqjb")
 
 [node name="WallCollider4" type="CollisionShape3D" parent="Box"]
-transform = Transform3D(1.3113417e-08, -0.1, 4.371139e-09, 2.1175822e-23, -4.371139e-09, -0.1, 0.1, 1.3113417e-08, -5.732057e-16, 1, 1, 0)
-shape = SubResource("WorldBoundaryShape3D_b7pdg")
+transform = Transform3D(-2.141858e-08, 0.49, -2.1418582e-08, 0, -2.1418582e-08, -0.49, -0.49, -2.141858e-08, 9.362359e-16, 4.921365, 16.310368, 0.9213643)
+shape = SubResource("BoxShape3D_wmqjb")
+
+[node name="InnerWallCollider" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(-2.141858e-08, 0.49, -2.1418582e-08, 0, -2.1418582e-08, -0.49, -0.49, -2.141858e-08, 9.362359e-16, 1.2476556, 10.7899475, -2.2758818)
+shape = SubResource("BoxShape3D_b7pdg")
+
+[node name="InnerWallCollider2" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(0.49, 1.7763568e-15, 0, 7.609408e-23, -2.1418584e-08, -0.49, -1.7763568e-15, 0.49, -2.1418584e-08, 3.0559683, 10.7899475, -0.45247287)
+shape = SubResource("BoxShape3D_b7pdg")
+
+[node name="FloorCollider" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.422274, 2.65441)
+shape = SubResource("BoxShape3D_pyicp")
+
+[node name="FloorCollider2" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.7782766, 9.422274, 0.92385674)
+shape = SubResource("BoxShape3D_pyicp")
 
 [node name="Spawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6236231, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2.892107, 16.719446, 2.2480578)
 script = ExtResource("2_stw3m")
 possible_models = Array[Mesh]([ExtResource("3_wmqjb"), ExtResource("4_pyicp")])
-spawn_count = 50
+spawn_count = 150
 spawn_delay = 0.0
 offset_scale = 0.0
-size = 0.3
+size = 0.1
 
 [node name="Claw" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7675066, 3.7840714, -0.8170407)
+transform = Transform3D(4.255, 0, 0, 0, 4.255, 0, 0, 0, 4.255, -3.0063334, 23.869057, -2.8723595)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Claw"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
@@ -68,7 +91,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 shape = SubResource("BoxShape3D_qkcfe")
 
 [node name="RailX" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0062592, 0)
+transform = Transform3D(4.255, 0, 0, 0, 4.255, 0, 0, 0, 4.255, 0.17221689, 16.334633, 0.8507719)
 
 [node name="Model" type="MeshInstance3D" parent="RailX"]
 transform = Transform3D(2, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 1.7706716, -0.84015)
@@ -76,13 +99,34 @@ mesh = SubResource("BoxMesh_01jy6")
 skeleton = NodePath("")
 
 [node name="RailZ" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0062592, 0)
+transform = Transform3D(4.255, 0, 0, 0, 4.255, 0, 0, 0, 4.255, 0, 16.334633, 0)
 
 [node name="Model" type="MeshInstance3D" parent="RailZ"]
 transform = Transform3D(-8.742278e-08, 0, -0.08, 0, 0.08, 0, 2, 0, -3.496911e-09, -0.75641835, 1.7706716, 0.0029140115)
 mesh = SubResource("BoxMesh_01jy6")
 skeleton = NodePath("")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
-mesh = SubResource("BoxMesh_da6k5")
+[node name="MachineTest" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.06954813, 0, 0.68595517)
+mesh = ExtResource("5_wmqjb")
+
+[node name="GlassTest" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.83045185, 11.5, 0.68595517)
+mesh = ExtResource("6_pyicp")
+surface_material_override/0 = SubResource("StandardMaterial3D_b7pdg")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.0424452, 8.8883705, -2.4171653)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.062079906, 1.0864706, -0.14444613)
+shape = SubResource("BoxShape3D_7di3s")
+
+[node name="Button" type="StaticBody3D" parent="." groups=["interactible"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.02894, 11.591863, -2.5793257)
+script = ExtResource("7_pyicp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button"]
+shape = SubResource("BoxShape3D_51efx")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

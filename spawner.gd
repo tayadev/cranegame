@@ -18,10 +18,8 @@ func spawn_objects_over_time() -> void:
 	
 		# create new rigidbody from scratch
 		var obj_instance = RigidBody3D.new()
-		obj_instance.global_transform.origin = self.global_transform.origin + Vector3(randf() * offset_scale, 0, randf() * offset_scale)
 		obj_instance.scale = Vector3.ONE * size
 		obj_instance.add_to_group("collectibles")
-		obj_instance.collision_layer = 2
 
 		# add mesh instance
 		var mesh_instance = MeshInstance3D.new()
@@ -32,13 +30,15 @@ func spawn_objects_over_time() -> void:
 			mesh_instance.material_override = material
 		obj_instance.add_child(mesh_instance)
 
-		# add a mesh collider
+		# add a simple box collider sized to the mesh
 		var collider = CollisionShape3D.new()
-		var convex_shape = ConvexPolygonShape3D.new()
+		var box_shape = BoxShape3D.new()
 		if mesh_instance.mesh:
-			convex_shape.points = mesh_instance.mesh.get_faces()
-		collider.shape = convex_shape
-		collider.scale = Vector3.ONE * size
+			var aabb = mesh_instance.mesh.get_aabb()
+			box_shape.size = aabb.size * size
+		else:
+			box_shape.size = Vector3.ONE * size
+		collider.shape = box_shape
 		obj_instance.add_child(collider)
 
 		# Add the RigidBody3D to the scene

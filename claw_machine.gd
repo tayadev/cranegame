@@ -82,17 +82,16 @@ func _process(delta: float) -> void:
 			stage = GameStage.IDLE
 
 
-func _input(event):
-	if event.is_action_pressed("button"):
-		match stage:
-			GameStage.IDLE:
-				stage = GameStage.SETX
-				print("Stage: SETX")
-			GameStage.SETX:
-				stage = GameStage.SETZ
-				print("Stage: SETZ")
-			GameStage.SETZ:
-				stage = GameStage.LOWERING
+func on_button_pressed():
+	match stage:
+		GameStage.IDLE:
+			stage = GameStage.SETX
+			print("Stage: SETX")
+		GameStage.SETX:
+			stage = GameStage.SETZ
+			print("Stage: SETZ")
+		GameStage.SETZ:
+			stage = GameStage.LOWERING
 
 func _on_claw_body_entered(body: Node3D) -> void:
 	if stage == GameStage.LOWERING and attached_object == null:
@@ -102,3 +101,12 @@ func _on_claw_body_entered(body: Node3D) -> void:
 			body.freeze = true  # Stop physics simulation
 			print("Attached collectible: ", body.name)
 			stage = GameStage.GRABBING
+
+
+# item enters output area
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	# delete item
+	if body.is_in_group("collectibles"):
+		body.queue_free()
+		# give player a coin
+		get_tree().root.get_node("Game").coins += 1
