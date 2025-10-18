@@ -21,6 +21,7 @@ func spawn_objects_over_time() -> void:
 		obj_instance.global_transform.origin = self.global_transform.origin + Vector3(randf() * offset_scale, 0, randf() * offset_scale)
 		obj_instance.scale = Vector3.ONE * size
 		obj_instance.add_to_group("collectibles")
+		obj_instance.collision_layer = 2
 
 		# add mesh instance
 		var mesh_instance = MeshInstance3D.new()

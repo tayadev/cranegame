@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bl5waqp7ry1ji"]
+[gd_scene load_steps=16 format=3 uid="uid://bl5waqp7ry1ji"]
 
 [ext_resource type="Script" uid="uid://cxhaidi7nkvhi" path="res://claw_machine.gd" id="1_3253y"]
 [ext_resource type="Script" uid="uid://bpc1x678fs6lb" path="res://game.gd" id="1_y2354"]
-[ext_resource type="Script" uid="uid://jcirtxgjs2uk" path="res://addons/orbit-controls/orbit-controls.gd" id="2_3253y"]
 [ext_resource type="Script" uid="uid://ji4alrky2er6" path="res://spawner.gd" id="2_nxogm"]
+[ext_resource type="Script" uid="uid://dvlur2gjxgims" path="res://player.gd" id="2_player"]
 [ext_resource type="ArrayMesh" uid="uid://bd63m8recbue8" path="res://assets/Ball_blue-1-Duck.vox" id="3_m7jmp"]
 [ext_resource type="ArrayMesh" uid="uid://k1getyec2bow" path="res://assets/Ball_blue-0-Ball.vox" id="4_y2354"]
 
@@ -22,6 +22,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_3253y"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_u3cyc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_player"]
 
 [node name="Scene" type="Node3D"]
 script = ExtResource("1_y2354")
@@ -99,10 +101,16 @@ skeleton = NodePath("../..")
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.77651954, -0.5549704, 0.29837117, 0, 0.47353494, 0.88077503, -0.6300932, -0.68393904, 0.36770913, 0, 0, 0)
 
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+script = ExtResource("2_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_player")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.009913351, 0.39494896, -0.9186496, 4.333782e-09, 0.91869485, 0.3949685, 0.999951, -0.003915459, 0.009107325, -2.2719357, 0.993876, -0.0035903454)
-
-[node name="OrbitControls" type="Node3D" parent="."]
-script = ExtResource("2_3253y")
-_camera = NodePath("../Camera3D")
-metadata/_custom_type_script = "uid://jcirtxgjs2uk"

@@ -12,7 +12,10 @@ enum ModifierType {
 	MULTIPLICATIVE,
 }
 
-var coins: int = 10
+var coins: int = 10:
+	set(value):
+		coins = max(value, 0)
+		$HUD/CoinLabel.text = "Coins: %d" % coins
 
 var base_stats := {
 	Stat.GRIP_STRENGTH: 1.0,
